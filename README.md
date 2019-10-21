@@ -11,6 +11,37 @@ This serves two main purposes:
 
 On a personal note, the code here was developed primarily with the second purpose in mind and is being released in the interest of goodwill towards the community of researchers, practitioners and individuals who have made it possible.
 
+## Sample サンプル
+
+| English | Japanese |
+| ------- | -------- |
+| NANOTREE | ナノツリー |
+| MICHELANGELOS | マイカランジャローズ |
+| LARAMIE | ララミー |
+| THRUN | スラン |
+| EMBRATEL | エンブラテル |
+| CALMNESS | カムナス |
+| PRESTI | プレスティー |
+| EUBOEAN | ユービーアン |
+| SYMMS | シムズ |
+| LUBA | ルバ |
+| FINESSE | フィネス |
+| OUDONG | ウドン |
+| YINGST | イングスト |
+| COSMOPOLITE | コズマパライト |
+| SIGN-OFF | サインオフ |
+| HOLE | ホール |
+| PRESENILIN | プレセニリン |
+| COMPANYWIDE | コンパニーワイド |
+| GRANINGEVERKEN | グラニンゲバーカン |
+| MORALE | モラール |
+| FLUBBING | フラビング |
+| DILLMAN | ディルマン |
+| KARNICKI | カーニキー |
+| MILKENS | ミルカンズ |
+| WORKER | ワーカー |
+
+
 ## Resources リソース
 
 This project makes use of the following resources.
