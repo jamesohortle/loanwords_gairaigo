@@ -6,7 +6,7 @@ This repository contains primarily some Python scripts for scraping various reso
 
 This serves two main purposes:
 
-1. As a resource for learners and researchers of Japanese who wish to study the phonetic changes that occur for (English) calques in Japanese and as a reference for vocabulary study.
+1. As a resource for learners and researchers of Japanese/English who wish to study the phonetic changes that occur for (English) calques in Japanese and as a reference for vocabulary study.
 2. As a resource for data science and machine learning practitioners who may wish to improve their systems (e.g., by allowing speech synthesis technologies to handle English text embedded in Japanese sentences).
 
 On a personal note, the code here was developed primarily with the second purpose in mind and is being released in the interest of goodwill towards the community of researchers, practitioners and individuals who have made it possible.
