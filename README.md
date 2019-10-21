@@ -1,4 +1,4 @@
-# Loanwords 外来語
+# Loanwords 外来語（ローンワード）
 
 In modern Japanese, a vast array of loanwords are employed in everyday life. These words are commonly written in *katakana*, one of the three primary scripts used to write Japanese. Although some words such as コーヒー *kōhī,* and パン *pan* are from sources other than English (Dutch *koffie* and Portuguese *pão*, respectively), the majority of loanwords in use today are derived from English. In addition to calques from English, there are also terms and phrases that have been coined by the Japanese using English roots; these are known as 和製英語 *wasei eigo* ("English made in Japan") and typically do not translate directly: e.g., メールマガジン *mēru magajin* ("mail magazine") for an e-mail newsletter.
 
@@ -29,7 +29,7 @@ Resources of the first type (Wikipedia, JMdict, LREC'14, JTCA) remain largely un
 
 Resources of the second type (Wiktionary, CMUdict, Britfone) are heavily processed in order to systematically transform phonetic and surface forms into more or less natural katakana.
 
-## Systematic mappings from English to katakana フロム英語、ツーカタカナのシステマティックなマッピング
+## Systematic mappings from English to katakana フロム イングリッシュ、ツー カタカナのシステマティックなマッピング
 
 One may wish to imagine that English words are transcribed perfectly phonetically into katakana. Alas, the unfortunate truth is that this is often not the case. Phenomena such as the introduction of loanwords when Japanese and/or English phonology was different, misreadings or misinterpretations of the English source words or precedence given to the written form of the English word over its pronunciation have led to cases such as モンキー *monkī* for English "monkey", which would be phonetically transcribed more accurately as マンキー *mankī*.
 
