@@ -11,7 +11,7 @@ This serves two main purposes:
 
 On a personal note, the code here was developed primarily with the second purpose in mind and is being released in the interest of goodwill towards the community of researchers and practitioners who have made it possible.
 
-## Resources 資料
+## Resources リソース
 
 This project makes use of the following resources.
 
@@ -29,13 +29,13 @@ Resources of the first type (Wikipedia, JMdict, LREC'14, JTCA) remain largely un
 
 Resources of the second type (Wiktionary, CMUdict, Britfone) are heavily processed in order to systematically transform phonetic and surface forms into more or less natural katakana.
 
-## Systematic mappings from English to katakana 英語からカタカナへの規則的なマッピング
+## Systematic mappings from English to katakana フロム英語、ツーカタカナのシステマティックなマッピング
 
 One may wish to imagine that English words are transcribed perfectly phonetically into katakana. Alas, the unfortunate truth is that this is often not the case. Phenomena such as the introduction of loanwords when Japanese and/or English phonology was different, misreadings or misinterpretations of the English source words or precedence given to the written form of the English word over its pronunciation have led to cases such as モンキー *monkī* for English "monkey", which would be phonetically transcribed more accurately as マンキー *mankī*.
 
 Therefore, we begin by transcribing phonetically and then correct these transcriptions based on some common graphemes. For example, English words starting with `MO` that have been transcribed as `マ` are corrected to `モ` (except for words beginning in `MOTHER`).
 
-## Deciding on canonical mappings 正準マッピングを判断
+## Deciding on canonical mappings カノニカルなマッピングをジャッジ
 
 Another complicating factor is the presence of multiple transcription systems and therefore transcriptions for a single English term. Some systems employ ウィ and ウェ to transcribe *wi* and *we*, while others may prefer ウイ or ウエ. Similarly, newer transcriptions allows ヴ *vu* to represent the voiced labiodental fricative *v* which does not exist in Japanese (it is still pronounced like a *b*) or combinations like クィ *kwi* or スィ *swi* for words like "queen" or "sweets".
 
