@@ -20,8 +20,8 @@ This project makes use of the following resources.
 - The [Japanese-Multilingual dictionary (JMdict)](http://www.edrdg.org/jmdict/edict_doc.html#IREF03)
 - The [CMU pronouncing dictionary (CMUdict)](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
 - Jose Llarena's [Britfone repository](https://github.com/JoseLlarena/Britfone).
-- The data created for the research paper [*Richardson J., Nakazawa T., Kurohashi S. Bilingual Dictionary Construction with Transliteration Filtering. In: Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC'14) (2014)*](http://www.lrec-conf.org/proceedings/lrec2014/index.html)
-- The Japan Technical Communicators Association's (JTCA) publication [外来語（カタカナ）表示ガイドライン 第3版 (2015)](https://www.jtca.org/standardization/katakana_guide_3_20171222.pdf)
+- The data created for the research paper [*Richardson J, Nakazawa T, Kurohashi S. Bilingual Dictionary Construction with Transliteration Filtering. In: Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC'14) (2014)*](http://www.lrec-conf.org/proceedings/lrec2014/index.html)
+- The Japan Technical Communicators Association's (JTCA) publication [外来語（カタカナ）表記ガイドライン 第3版 (2015)](https://www.jtca.org/standardization/katakana_guide_3_20171222.pdf)
 
 The resources above can be divided into two types: those that provide an English-katakana mapping and those that provide an English-phonetic mapping.
 
@@ -31,7 +31,7 @@ Resources of the second type (Wiktionary, CMUdict, Britfone) are heavily process
 
 ## Systematic mappings from English to katakana 英語からカタカナへの規則的なマッピング
 
-One may wish to imagine that English words are transcribed perfectly phonetically into katakana. Alas, the unfortunate truth is that this is often not the case. Phenomena such as the introduction of loanwords when Japanese or English phonology was different, misreadings or misinterpretations of the English source words or precedence given to the written form of the English word over its pronunciation have led to cases such as モンキー *monkī* for English "monkey", which would be phonetically transcribed more accurately as マンキー *mankī*.
+One may wish to imagine that English words are transcribed perfectly phonetically into katakana. Alas, the unfortunate truth is that this is often not the case. Phenomena such as the introduction of loanwords when Japanese and/or English phonology was different, misreadings or misinterpretations of the English source words or precedence given to the written form of the English word over its pronunciation have led to cases such as モンキー *monkī* for English "monkey", which would be phonetically transcribed more accurately as マンキー *mankī*.
 
 Therefore, we begin by transcribing phonetically and then correct these transcriptions based on some common graphemes. For example, English words starting with `MO` that have been transcribed as `マ` are corrected to `モ` (except for words beginning in `MOTHER`).
 
