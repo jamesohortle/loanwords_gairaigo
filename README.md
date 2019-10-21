@@ -51,7 +51,7 @@ This project makes use of the following resources.
 - The [Japanese-Multilingual dictionary (JMdict)](http://www.edrdg.org/jmdict/edict_doc.html#IREF03)
 - The [CMU pronouncing dictionary (CMUdict)](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
 - Jose Llarena's [Britfone repository](https://github.com/JoseLlarena/Britfone).
-- The data created for the research paper [*Richardson J, Nakazawa T, Kurohashi S. Bilingual Dictionary Construction with Transliteration Filtering. In: Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC'14) (2014)*](http://www.lrec-conf.org/proceedings/lrec2014/index.html)
+- The [data](http://orchid.kuee.kyoto-u.ac.jp/~john/files/lrec2014.tar.bz2) created for the research paper [*Richardson J, Nakazawa T, Kurohashi S. Bilingual Dictionary Construction with Transliteration Filtering. In: Proceedings of the Ninth International Conference on Language Resources and Evaluation (LREC'14) (2014)*](http://www.lrec-conf.org/proceedings/lrec2014/index.html)
 - The Japan Technical Communicators Association's (JTCA) publication [外来語（カタカナ）表記ガイドライン 第3版 (2015)](https://www.jtca.org/standardization/katakana_guide_3_20171222.pdf)
 
 The resources above can be divided into two types: those that provide an English-katakana mapping and those that provide an English-phonetic mapping.
