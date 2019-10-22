@@ -69,18 +69,18 @@ def makeTable():
         conn.execute(
             """
             PRAGMA ENCODING=UTF8;
-         """
+            """
         )
         conn.execute(
             """
-            CREATE TABLE IF NOT EXISTS
-               wikipedia (
-                  pageid INTEGER UNIQUE,
-                  english text,
-                  japanese text
-               )
-            ;
-         """
+                CREATE TABLE IF NOT EXISTS
+                    wikipedia (
+                        pageid INTEGER UNIQUE,
+                        english text,
+                        japanese text
+                    )
+                ;
+            """
         )
 
 
@@ -98,23 +98,23 @@ def getLanglinkIds():
         print("MySQL is not cooperating...")
     else:
         query = """
-         SELECT
-            ll_from,
-            ll_title
-         FROM
-            langlinks
-         WHERE
-            (ll_lang = %s)
-         ;
-      """
+            SELECT
+                ll_from,
+                ll_title
+            FROM
+                langlinks
+            WHERE
+                (ll_lang = %s)
+            ;
+        """
         params = (b"ja",)
         cursor.execute(query, params)
 
         with sqlite3.connect(str(WIKI_DB_PATH.resolve())) as conn:
             conn.execute(
                 """
-               PRAGMA ENCODING=UTF8;
-            """
+                    PRAGMA ENCODING=UTF8;
+                """
             )
             sys.stdout.write("[")
             sys.stdout.flush()
@@ -127,28 +127,28 @@ def getLanglinkIds():
                     try:
                         conn.execute(
                             """
-                        INSERT INTO
-                           wikipedia (
-                              pageid,
-                              japanese
-                           )
-                        VALUES
-                           (?, ?)
-                        ;
-                     """,
+                                INSERT INTO
+                                    wikipedia (
+                                        pageid,
+                                        japanese
+                                    )
+                                VALUES
+                                    (?, ?)
+                                ;
+                            """,
                             (pageid, ll_title),
                         )
                     except sqlite3.IntegrityError:
                         conn.execute(
                             """
-                        UPDATE
-                           wikipedia
-                        SET
-                           japanese = ?
-                        WHERE
-                           pageid = ?
-                        ;
-                     """,
+                                UPDATE
+                                    wikipedia
+                                SET
+                                    japanese = ?
+                                WHERE
+                                    ßpageid = ?
+                                ;
+                            """,
                             (ll_title, pageid),
                         )
                     else:
@@ -171,18 +171,18 @@ def getEngTitles():
     with sqlite3.connect(str(WIKI_DB_PATH.resolve())) as conn:
         conn.execute(
             """
-            PRAGMA ENCODING=UTF8;
-         """
+                PRAGMA ENCODING=UTF8;
+            """
         )
 
         results = conn.execute(
             """
-            SELECT
-               pageid
-            FROM
-               wikipedia
-            ;
-         """
+                SELECT
+                    pageid
+                FROM
+                    wikipedia
+                ;
+            """
         )
 
         pageids = {int(r[0]) for r in results}
@@ -202,14 +202,14 @@ def getEngTitles():
 
                     conn.execute(
                         """
-                     UPDATE
-                        wikipedia 
-                     SET
-                        english = ?
-                     WHERE
-                        pageid = ?
-                     ;
-                  """,
+                            UPDATE
+                                wikipedia 
+                            SET
+                                english = ?
+                            WHERE
+                                pageid = ?
+                            ;
+                        """,
                         (eng_title, pid),
                     )
                 else:
@@ -236,18 +236,18 @@ def cleanDb():
     with sqlite3.connect(str(WIKI_DB_PATH.resolve())) as conn:
         conn.execute(
             """
-            DELETE FROM
-               wikipedia
-            WHERE
-               japanese LIKE ''
-            OR
-               english LIKE ''
-            OR
-               japanese IS NULL
-            OR
-               english IS NULL
-            ;
-         """
+                DELETE FROM
+                    wikipedia
+                WHERE
+                    japanese LIKE ''
+                OR
+                    english LIKE ''
+                OR
+                    japanese IS NULL
+                OR
+                    english IS NULL
+                ;
+            """
         )
 
 

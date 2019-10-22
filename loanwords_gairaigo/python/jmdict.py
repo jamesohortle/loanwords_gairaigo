@@ -28,17 +28,17 @@ def makeTable():
     with sqlite3.connect(str(DB_PATH.resolve())) as conn:
         conn.execute(
             """
-            CREATE TABLE IF NOT EXISTS
-               gairaigo (
-                  entry_sequence INTEGER UNIQUE,
-                  japanese TEXT,
-                  reading TEXT,
-                  gloss TEXT,
-                  strict_eng TEXT,
-                  wasei TEXT
-               )
-            ;
-         """
+                CREATE TABLE IF NOT EXISTS
+                    gairaigo (
+                        entry_sequence INTEGER UNIQUE,
+                        japanese TEXT,
+                        reading TEXT,
+                        gloss TEXT,
+                        strict_eng TEXT,
+                        wasei TEXT
+                    )
+                ;
+            """
         )
 
 
@@ -144,20 +144,20 @@ def scan_dict():
                 with sqlite3.connect(str(DB_PATH.resolve())) as conn:
                     try:
                         conn.execute(
-                            f"""
-                        INSERT INTO
-                           gairaigo (
-                              entry_sequence,
-                              japanese,
-                              reading,
-                              gloss,
-                              strict_eng,
-                              wasei
-                           )
-                           VALUES
-                              (?, ?, ?, ?, ?, ?)
-                           ;
-                     """,
+                            """
+                                INSERT INTO
+                                    gairaigo (
+                                        entry_sequence,
+                                        japanese,
+                                        reading,
+                                        gloss,
+                                        strict_eng,
+                                        wasei
+                                    )
+                                VALUES
+                                    (?, ?, ?, ?, ?, ?)
+                                ;
+                            """,
                             (
                                 entry_sequence,
                                 surface_form,
@@ -169,18 +169,18 @@ def scan_dict():
                         )
                     except sqlite3.IntegrityError:
                         conn.execute(
-                            f"""
-                        UPDATE
-                           gairaigo
-                        SET
-                           japanese = ?,
-                           reading = ?,
-                           gloss = ?,
-                           strict_eng = ?,
-                           wasei = ?
-                        WHERE
-                           entry_sequence = ?
-                     """,
+                            """
+                                UPDATE
+                                    gairaigo
+                                SET
+                                    japanese = ?,
+                                    reading = ?,
+                                    gloss = ?,
+                                    strict_eng = ?,
+                                    wasei = ?
+                                WHERE
+                                    entry_sequence = ?
+                            """,
                             (
                                 surface_form,
                                 reading,

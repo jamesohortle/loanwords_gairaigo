@@ -3,13 +3,11 @@
 """Phonotactics à la Wikipedia."""
 
 """
- " English phonotactics typically follow (C)3V(C)5 structure for a syllable,
- " i.e., up to 3 consonants/semivowels then a vowel then up to 5 consonants/semivowels.
- " Wikipedia lists the following as [onsets](https://en.wikipedia.org/wiki/English_phonology#Onset):
- " ;
- " and the folling as [codas](https://en.wikipedia.org/wiki/English_phonology#Coda):
- " .
- " Therefore, there are as many as xyz consonant clusters.
+English phonotactics typically follows (C)3V(C)5 structure for a syllable,
+i.e., up to 3 consonants/semivowels then a vowel then up to 5 consonants/semivowels.
+Wikipedia lists the following as [onsets](https://en.wikipedia.org/wiki/English_phonology#Onset)
+and the folling as [codas](https://en.wikipedia.org/wiki/English_phonology#Coda).
+Therefore, there are as many as ??? consonant clusters.
 """
 
 # Fix the copy-pastes from Wikipedia.

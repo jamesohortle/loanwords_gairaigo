@@ -31,12 +31,12 @@ non_starters = tuple(
     ]
 )
 
-with sqlite3.connect(str(DB_PATH.resolve())) as conn, CMU_PATH.open(
-    mode="r", encoding="cp437"
-) as cmu_dict, PHONE_PATH.open(mode="r") as phone_file, SYMB_PATH.open(
-    mode="r"
-) as symbols_file:
-
+# fmt: off
+with sqlite3.connect(str(DB_PATH.resolve())) as conn, \
+    CMU_PATH.open(mode="r", encoding="cp437") as cmu_dict, \
+    PHONE_PATH.open(mode="r") as phone_file, \
+    SYMB_PATH.open(mode="r") as symbols_file:
+# fmt: on
     conn.execute(
         """
             PRAGMA ENCODING=UTF8;
