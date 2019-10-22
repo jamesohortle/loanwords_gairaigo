@@ -12,9 +12,9 @@ DB_DIR = ROOT_DIR / "db"
 PYTH_DIR = ROOT_DIR / "python"
 
 DB_PATH = DB_DIR / "cmudict.db"
-CMU_PATH = DATA_DIR / "cmudict-0.7b.txt"
-PHONE_PATH = DATA_DIR / "cmudict-0.7b.phones.txt"
-SYMB_PATH = DATA_DIR / "cmudict-0.7b.symbols.txt"
+CMU_PATH = DATA_DIR / "cmudict-0.7b"
+PHONE_PATH = DATA_DIR / "cmudict-0.7b.phones"
+SYMB_PATH = DATA_DIR / "cmudict-0.7b.symbols"
 
 
 # Only take lines that start with letters or maybe an apostrophe (e.g., "'twas").
