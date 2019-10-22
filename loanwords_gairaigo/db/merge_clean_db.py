@@ -50,12 +50,12 @@ def norm_ja(word: str) -> str:
 
 
 HERE = Path(__file__).parent
-TEST_DB = HERE / "test.db"
-TRAIN_DB = HERE / "train.db"
+TYPE_1_DB = HERE / "type_1.db"
+TYPE_2_DB = HERE / "type_2.db"
 MERGED_DB = HERE / "merged.db"
 
-with sqlite3.connect(str(TEST_DB.resolve())) as conn:
-    full_test = map(
+with sqlite3.connect(str(TYPE_1_DB.resolve())) as conn:
+    type_1 = map(
         lambda ej: (norm_en(ej[0]), norm_ja(ej[1])),
         conn.execute(
             """
@@ -63,30 +63,30 @@ with sqlite3.connect(str(TEST_DB.resolve())) as conn:
                 english,
                 final
             FROM
-                test
+                type_1
             ;
         """
         ).fetchall(),
     )
 conn.close()
 
-with sqlite3.connect(str(TRAIN_DB.resolve())) as conn:
-    full_train = map(
+with sqlite3.connect(str(TYPE_2_DB.resolve())) as conn:
+    type_2 = map(
         lambda ej: (norm_en(ej[0]), norm_ja(ej[1])),
         conn.execute(
             """
-            SELECT
-                english,
-                final
-            FROM
-                train
-            ;
-        """
+                SELECT
+                    english,
+                    final
+                FROM
+                    type_2
+                ;
+            """
         ).fetchall(),
     )
 conn.close()
 
-merged = itertools.chain(full_test, full_train)
+merged = itertools.chain(type_1, type_2)
 
 with sqlite3.connect(str(MERGED_DB.resolve())) as conn:
     conn.execute(
