@@ -61,11 +61,11 @@ Resources of the second type (Wiktionary, CMUdict, Britfone) are heavily process
 
 ## Obtaining the final mapping ファイナルマッピングをゲット
 
-The simplest way is to import the final data from `loanwords_gairaigo/db/merged.sql` into a database.
+The simplest way is to import the final data from `./loanwords_gairaigo/db/merged.sql` into a database.
 
 If you wish to obtain the individual processed data before they are merged, you can import the data in the other SQL files `britfone.sql, cmudict.sql, wiktionary.sql, lrec2014.sql, jtca.sql, jmdict.sql, wikipedia.sql`. To generate the type one and type two data, use `create_type_1.sql` and `create_type_2.sql`.
 
-Alternatively, you can recreate the data from scratch by downloading the resources as explained in `loanwords_gairaigo/data/download_instructions`, processing them in the same order as in `loanwords_gairaigo/python/process_all.sh` which will create some SQLite 3 databases in `loanwords_gairaigo/db/`, which are then merged by `loanwords_gairaigo/db/create_type_1.sql`, `loanwords_gairaigo/db/create_type_2.sql` and finally `loanwords_gairaigo/db/merge_clean_db.py`.
+Alternatively, you can recreate the data from scratch by downloading the resources as explained in `./loanwords_gairaigo/data/download_instructions`, processing them in the same order as in `./loanwords_gairaigo/python/process_all.sh` which will create some SQLite 3 databases in `./loanwords_gairaigo/db/`, which are then merged by `./loanwords_gairaigo/db/create_type_1.sql`, `./loanwords_gairaigo/db/create_type_2.sql` and finally `./loanwords_gairaigo/db/merge_clean_db.py`.
 
 More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries lxml and the MySQL package, which can both be easily `pip`-installed with `pip3 install lxml mysql-connector-python`.
 
