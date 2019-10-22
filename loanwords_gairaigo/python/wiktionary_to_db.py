@@ -613,11 +613,11 @@ def makeArpabet():
         results = conn.execute(
             """
                 SELECT
-                pageid,
-                title,
-                ipa
+                    pageid,
+                    title,
+                    ipa
                 FROM
-                wiktionary
+                    wiktionary
                 ;
             """
         )
@@ -625,13 +625,13 @@ def makeArpabet():
         for pageid, title, ipa in results:
             conn.execute(
                 """
-                UPDATE
-                    wiktionary
-                SET
-                    arpa = ?
-                WHERE
-                    pageid = ?
-                ;
+                    UPDATE
+                        wiktionary
+                    SET
+                        arpa = ?
+                    WHERE
+                        pageid = ?
+                    ;
                 """,
                 (convertIpa(ipa), pageid),
             )

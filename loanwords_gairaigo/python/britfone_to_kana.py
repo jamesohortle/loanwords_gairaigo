@@ -9,13 +9,12 @@ from functools import lru_cache
 
 from phonotactics import onsets, codas
 from prekana_map import prekana_to_kana
-from cmu_utils import (
+from britfone_utils import (
     vowels,
     semivowels,
     consonants,
-    symb_to_prekana,
-    test_data,
     non_geminating,
+    symb_to_prekana,
 )
 
 digits = re.compile(r"\d+")
@@ -37,38 +36,6 @@ multiLongVowel = re.compile(r"ー{2,}")
 
 def removeMultiLongVowels(s):
     return multiLongVowel.sub("ー", s).strip()
-
-
-# Reverse of accumulate ==> reverse of cum ==> muc?
-# a,b,c,d ==> abcd, bcd, cd, d
-def muc_str(s):
-    mucs = []
-    for i in range(len(s)):
-        new_str = " ".join(s[i:])
-        mucs.append(new_str)
-    return mucs
-
-
-# This is doing the wrong thing...
-def group_by_onset_and_coda(clusters):
-    new_clusters = []
-    for c in clusters:
-        if len(c) == 1:
-            new_clusters.append(c)
-        else:
-            # Find the onset and previous coda iteratively.
-            mucs = muc_str(c[:-1])
-            prev_coda = c[:-1]
-            for i, m in enumerate(mucs):
-                if m in onsets:
-                    prev_coda = c[:i]
-                    onset = c[i:]
-                    if prev_coda:
-                        new_clusters.append(prev_coda)
-                    if onset:
-                        new_clusters.append(onset)
-                    break
-    return new_clusters
 
 
 def group_japonically(clusters):
@@ -131,32 +98,32 @@ def group_japonically(clusters):
     old_clusters = new_clusters.copy()
     new_clusters = []
     for i, c in enumerate(old_clusters):
-        if c == ["T", "S"]:
+        if c == ["t", "s"]:
             new_clusters.append(["TS", None])
         elif (
             (i != len(old_clusters) - 1)
-            and c == ["T"]
-            and old_clusters[i + 1][0] == "S"
+            and c == ["t"]
+            and old_clusters[i + 1][0] == "s"
         ):
             old_clusters[i + 1][0] = "TS"  # Update the next cluster.
-        elif c == ["M", "P"]:
+        elif c == ["m", "p"]:
             new_clusters.append(["NP", None])
         elif (
             (i != len(old_clusters) - 1)
-            and c == ["M"]
-            and old_clusters[i + 1][0] == "P"
+            and c == ["m"]
+            and old_clusters[i + 1][0] == "p"
         ):
-            new_clusters.append(["N", None])
-        elif c == ["M", "B"]:
+            new_clusters.append(["NN", None])
+        elif c == ["m", "b"]:
             new_clusters.append(["NB", None])
         elif (
             (i != len(old_clusters) - 1)
-            and c == ["M"]
-            and old_clusters[i + 1][0] == "B"
+            and c == ["m"]
+            and old_clusters[i + 1][0] == "b"
         ):
-            new_clusters.append(["N", None])
-        elif c[0:2] == ["D", "W"]:
-            new_clusters.append(["D", None])
+            new_clusters.append(["NN", None])
+        elif c[0:2] == ["d", "w"]:
+            new_clusters.append(["d", None])
             new_clusters.append(c[1:])
         elif c[-1] not in vs:
             for consonant in c:
@@ -217,22 +184,24 @@ def fix_gemination(clusters):
     " Hence, need only check second, third and fourth cases.
     """
 
-    if clusters[-1][-1] == "AE":
+    if clusters[-1][-1] in {"ˈæ", "ˌæ"}:
         clusters[-1][-1] = "a"
+    elif clusters[-1][-1] in {"ˈɒ", "ˌɒ"}:
+        clusters[-1][-1] = "o"
 
     for i, cluster in enumerate(clusters):
-        if cluster[-1] == "AE":
+        if cluster[-1] in {"ˈæ", "ˌæ", "ˈɒ", "ˌɒ"}:
             if clusters[i + 1][0] in non_geminating.keys():
-                cluster[-1] = "a"
+                cluster[-1] = "a" if cluster[-1] in {"ˈæ", "ˌæ"} else "o"
 
     return clusters
 
 
 def fix_final_DZ_TS(clusters):
-    if clusters[-2:] == [["D", None], ["Z", None]]:
-        clusters = clusters[:-2] + [["Z", None]]
-    elif clusters[-2:] == [["T", None], ["S", None]]:
-        clusters = clusters[:-2] + [["TS", None]]
+    if clusters[-2:] == [["d", None], ["z", None]]:
+        clusters = clusters[:-2] + [["z", None]]
+    elif clusters[-2:] == [["t", None], ["s", None]]:
+        clusters = clusters[:-2] + [["ts", None]]
     return clusters
 
 
@@ -256,10 +225,12 @@ def group_by_cluster(phoneme_list):
     # v = vowel, k = consonant, s = semivowel.
     clusters = group_japonically(clusters)
 
+    ## Do we even need to fix rhoticity for RP?
     # Fix how R and ER are interpreted.
-    clusters = fix_rhoticity(clusters)
+    # clusters = fix_rhoticity(clusters)
 
     # Fix where gemination ッ can occur.
+    # print(clusters)
     clusters = fix_gemination(clusters)
 
     # Final ["D", None], ["Z", None] to just ["Z", None] and
@@ -281,18 +252,18 @@ def symbs_to_prekana(clusters):
 
 
 @lru_cache()
-def arpa_to_prekana(arpabet_string):
-    if not arpabet_string:
+def ipa_to_prekana(ipa_string):
+    if not ipa_string:
         return ""
-    phonemes = arpabet_string.split(" ")
-    phonemes = remove_stress(phonemes)
+    phonemes = ipa_string.split(" ")
+    # phonemes = remove_stress(phonemes)
     clusters = group_by_cluster(phonemes)
 
     return symbs_to_prekana(clusters)
 
 
-def arpa_to_kana(arpabet_string, english_string=""):
-    prekanas = arpa_to_prekana(arpabet_string)
+def ipa_to_kana(ipa_string, english_string=""):
+    prekanas = ipa_to_prekana(ipa_string)
     kanas = "".join([prekana_to_kana.get(p, p) for p in prekanas.split(" ")])
 
     # Fix some common transcriptions that are based on English spelling.
@@ -441,26 +412,26 @@ def arpa_to_kana(arpabet_string, english_string=""):
 ROOT_DIR = Path("..")
 DATA_DIR = ROOT_DIR / "data"
 DB_DIR = ROOT_DIR / "db"
-DB_PATH = DB_DIR / "cmudict.db"
+DB_PATH = DB_DIR / "britfone.db"
 
 if __name__ == "__main__":
     with sqlite3.connect(str(DB_PATH.resolve())) as conn:
         conn.execute(
             """
-            PRAGMA ENCODING=UTF8;
+                PRAGMA ENCODING=UTF8;
             """
         )
 
         conn.execute(
             """
                 CREATE TABLE IF NOT EXISTS
-                hand_mapping (
-                    english text UNIQUE,
-                    pronunciation text,
-                    prekana text,
-                    transcription text,
-                    final TEXT
-                )
+                    hand_mapping (
+                        english text UNIQUE,
+                        pronunciation text,
+                        prekana text,
+                        transcription text,
+                        final TEXT
+                    )
                 ;
             """
         )
@@ -468,9 +439,9 @@ if __name__ == "__main__":
         entries = conn.execute(
             """
                 SELECT 
-                english, pronunciation
+                    english, ipa
                 FROM 
-                main
+                    main
                 ;
             """
         )
@@ -479,43 +450,43 @@ if __name__ == "__main__":
             try:
                 conn.execute(
                     """
-                    INSERT INTO
-                        hand_mapping (
+                        INSERT INTO
+                            hand_mapping (
                             english,
                             pronunciation,
                             prekana,
                             transcription,
                             final
                         )
-                    VALUES
-                        (?, ?, ?, ?, ?)
-                    ;
-                """,
+                        VALUES
+                            (?, ?, ?, ?, ?)
+                        ;
+                    """,
                     (
                         e[0],
                         e[1],
-                        arpa_to_prekana(e[1]),
-                        arpa_to_kana(e[1]),
-                        arpa_to_kana(e[1], e[0]),
+                        ipa_to_prekana(e[1]),
+                        ipa_to_kana(e[1]),
+                        ipa_to_kana(e[1], e[0]),
                     ),
                 )
             except sqlite3.IntegrityError:
                 conn.execute(
                     """
-                    UPDATE
-                        hand_mapping
-                    SET
-                        prekana = ?,
-                        transcription = ?,
-                        final = ?
-                    WHERE
-                        english = ?
-                    ;
-                """,
+                        UPDATE
+                            hand_mapping
+                        SET
+                            prekana = ?,
+                            transcription = ?,
+                            final = ?
+                        WHERE
+                            english = ?
+                        ;
+                    """,
                     (
-                        arpa_to_prekana(e[1]),
-                        arpa_to_kana(e[1]),
-                        arpa_to_kana(e[1], e[0]),
+                        ipa_to_prekana(e[1]),
+                        ipa_to_kana(e[1]),
+                        ipa_to_kana(e[1], e[0]),
                         e[0],
                     ),
                 )
