@@ -1,5 +1,5 @@
 -- Create database.
--- CREATE DATABASE IF NOT EXISTS test;
+-- CREATE DATABASE IF NOT EXISTS type_1;
 PRAGMA ENCODING = "UTF-8";
 
 -- Pre-cleaning.
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS lrec2014;
 DROP TABLE IF EXISTS jmdict;
 DROP TABLE IF EXISTS wikipedia;
 DROP TABLE IF EXISTS unique_tokens;
-DROP TABLE IF EXISTS test;
+DROP TABLE IF EXISTS type_1;
 
 -- LREC2014
 -- Bilingual Dictionary Construction with Transliteration Filtering; Richardson, Nakazawa, Kurohashi (2014).
@@ -127,7 +127,7 @@ DETACH db_wikipedia;
 
 
 
--- Create training data.
+-- Create type_1 data.
 CREATE TABLE IF NOT EXISTS
    unique_tokens(
       english TEXT UNIQUE
@@ -145,7 +145,7 @@ UNION
 SELECT UPPER(english) FROM jmdict;
 
 CREATE TABLE IF NOT EXISTS
-   test
+   type_1
 AS
 SELECT 
    unique_tokens.english, -- 365,203 entries
@@ -163,10 +163,10 @@ FROM
 
 -- Remove bad entries (0 of them!).
 -- SELECT COUNT(*) FROM
---    test
+--    type_1
 -- WHERE
 DELETE FROM
-   test
+   type_1
 WHERE
    english IS NULL
    OR
@@ -176,7 +176,7 @@ WHERE
    OR
    final LIKE '';
 
--- Leave only training data.
+-- Leave only type 1 data.
 DROP TABLE IF EXISTS lrec2014;
 DROP TABLE IF EXISTS jtca;
 DROP TABLE IF EXISTS jmdict;

@@ -1,5 +1,4 @@
 -- Create database.
--- CREATE DATABASE IF NOT EXISTS training;
 PRAGMA ENCODING = "UTF-8";
 
 -- Pre-cleaning.
@@ -7,7 +6,7 @@ DROP TABLE IF EXISTS britfone;
 DROP TABLE IF EXISTS cmudict;
 DROP TABLE IF EXISTS wiktionary;
 DROP TABLE IF EXISTS unique_tokens;
-DROP TABLE IF EXISTS train;
+DROP TABLE IF EXISTS type_2;
 
 -- Britfone
 ATTACH DATABASE '/Users/j-hortle/gairaigo/db/britfone.db' AS db_britfone;
@@ -77,7 +76,7 @@ WHERE
    );
 DETACH db_wiktionary;
 
--- Create training data.
+-- Create type 2 data.
 CREATE TABLE IF NOT EXISTS
    unique_tokens(
       english TEXT UNIQUE
@@ -93,7 +92,7 @@ UNION
 SELECT UPPER(english) FROM wiktionary;
 
 CREATE TABLE IF NOT EXISTS
-   train
+   type_2
 AS
 SELECT 
    unique_tokens.english, -- 161,520 entries
@@ -110,10 +109,10 @@ FROM
 
 -- Remove bad entries (54 of them).
 -- SELECT COUNT(*) FROM
---    train
+--    type_2
 -- WHERE
 DELETE FROM
-   train
+   type_2
 WHERE
    english IS NULL
    OR
@@ -127,7 +126,7 @@ WHERE
    OR
    final LIKE '';
 
--- Leave only training data.
+-- Leave only type 2 data.
 DROP TABLE IF EXISTS britfone;
 DROP TABLE IF EXISTS cmudict;
 DROP TABLE IF EXISTS wiktionary;
