@@ -2,7 +2,7 @@
 
 In modern Japanese, a vast array of loanwords are employed in everyday life. These words are commonly written in *katakana*, one of the three primary scripts used to write Japanese. Although some words such as コーヒー *kōhī,* and パン *pan* are from sources other than English (Dutch *koffie* and Portuguese *pão*, respectively), the majority of loanwords in use today are derived from English. In addition to calques from English, there are also terms and phrases that have been coined by the Japanese using English roots; these are known as 和製英語 *wasei eigo* ("English made in Japan") and typically do not translate directly: e.g., メールマガジン *mēru magajin* ("mail magazine") for an e-mail newsletter.
 
-This repository contains primarily some Python scripts for scraping various resources in order to create a set of (primarily English) loanwords in Japanese and some SQL scripts to merge the data. At the moment, there are 221,587 English-Japanese vocabulary pairs.
+This repository contains primarily some Python (>= 3.6) scripts for scraping various resources in order to create a set of (primarily English) loanwords in Japanese and some SQL scripts to merge the data. At the moment, there are 221,587 English-Japanese vocabulary pairs.
 
 This serves two main purposes:
 
@@ -40,7 +40,6 @@ On a personal note, the code here was developed primarily with the second purpos
 | KARNICKI | カーニキー |
 | MILKENS | ミルカンズ |
 | WORKER | ワーカー |
-
 
 ## Resources リソース
 
