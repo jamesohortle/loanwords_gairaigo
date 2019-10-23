@@ -67,7 +67,6 @@ If you wish to obtain the individual processed data before they are merged, you 
 
 Alternatively, you can recreate the data from scratch by downloading the resources as explained in `./loanwords_gairaigo/data/download_instructions`, processing them in the same order as in `./loanwords_gairaigo/python/process_all.sh` which will create some SQLite 3 databases in `./loanwords_gairaigo/db/`, which are then merged by `./loanwords_gairaigo/db/create_type_1.sql`, `./loanwords_gairaigo/db/create_type_2.sql` and finally `./loanwords_gairaigo/db/merge_clean_db.py`.
 
-More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries lxml and the MySQL package, which can both be easily `pip`-installed with `pip3 install lxml mysql-connector-python`.
 More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries [lxml](https://pypi.org/project/lxml/) and [MySQL Connector](https://pypi.org/project/mysql-connector-python/), which can both be easily `pip`-installed with `pip3 install lxml mysql-connector-python`.
 
 ## Systematic mappings from English to katakana フロム イングリッシュ、ツー カタカナのシステマティックなマッピング
