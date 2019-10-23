@@ -67,6 +67,10 @@ If you wish to obtain the individual processed data before they are merged, you 
 
 Alternatively, you can recreate the data from scratch by downloading the resources as explained in `./loanwords_gairaigo/data/download_instructions`, processing them in the same order as in `./loanwords_gairaigo/python/process_all.sh` which will create some SQLite 3 databases in `./loanwords_gairaigo/db/`, which are then merged by `./loanwords_gairaigo/db/create_type_1.sql`, `./loanwords_gairaigo/db/create_type_2.sql` and finally `./loanwords_gairaigo/db/merge_clean_db.py`.
 
+Care should be taken for the data from JMdict; data were initially extracted mechanically and then judged by three human reviewers to determine if they were acceptable loanwords (e.g., many mimetic words (擬音・擬態語 *gion/gitai-go*) made it through the initial pass). The words that were eligible for the final merge are inidicated with a value of `1` in the column `ok` of table `gairaigo_combined` in `jmdict.sql`. The judging criteria are available in `./loanwords_gairaigo/docs/外来語を判断する.pdf` (Japanese only).
+
+The situation is similar for JTCA, where the table from the PDF was copy-pasted and reviewed for errors. As such, there exists only the SQL file `jtca.sql`.
+
 More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries [lxml](https://pypi.org/project/lxml/) and [MySQL Connector](https://pypi.org/project/mysql-connector-python/), which can both be easily `pip`-installed with `pip3 install lxml mysql-connector-python`.
 
 ## Systematic mappings from English to katakana フロム イングリッシュ、ツー カタカナのシステマティックなマッピング
