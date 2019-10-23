@@ -1,6 +1,6 @@
 # Transcription for Japanese
 
-We follow the [_Nihon-shiki_](https://en.wikipedia.org/wiki/Nihon-shiki_romanization) method for transcribing Japanese _kana_ into Roman letters since it is a one-to-one representation. However, we make some important modifications.
+We follow the [_Nihon-shiki_](https://en.wikipedia.org/wiki/Nihon-shiki_romanization) method for transcribing Japanese _kana_ into Roman letters since it is a one-to-one representation. However, we make some important modifications.
 
 ## Modifications
 
