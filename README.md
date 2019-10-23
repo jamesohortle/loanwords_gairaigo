@@ -71,7 +71,7 @@ Care should be taken for the data from JMdict; data were initially extracted mec
 
 The situation is similar for JTCA, where the table from the PDF was copy-pasted and reviewed for errors. As such, there exists only the SQL file `jtca.sql`.
 
-More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries [lxml](https://pypi.org/project/lxml/) and [MySQL Connector](https://pypi.org/project/mysql-connector-python/), which can both be easily `pip`-installed with `pip3 install lxml mysql-connector-python`.
+More information on how the data is processed is below. If you decide to process the data from scratch, you will require MySQL for the langlinks Wikipedia file, Python 3.6 or greater and the 3rd party Python libraries [lxml](https://pypi.org/project/lxml/) and [MySQL Connector](https://pypi.org/project/mysql-connector-python/) and [Unidecode](https://pypi.org/project/Unidecode/) which can all be easily `pip`-installed with `pip3 install lxml mysql-connector-python Unidecode`.
 
 ## Systematic mappings from English to katakana フロム イングリッシュ、ツー カタカナのシステマティックなマッピング
 
