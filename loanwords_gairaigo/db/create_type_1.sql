@@ -4,46 +4,11 @@ PRAGMA ENCODING = "UTF-8";
 
 -- Pre-cleaning.
 DROP TABLE IF EXISTS lrec2014;
+DROP TABLE IF EXISTS jtca;
 DROP TABLE IF EXISTS jmdict;
 DROP TABLE IF EXISTS wikipedia;
 DROP TABLE IF EXISTS unique_tokens;
 DROP TABLE IF EXISTS type_1;
-
--- LREC2014
--- Bilingual Dictionary Construction with Transliteration Filtering; Richardson, Nakazawa, Kurohashi (2014).
--- http://www.lrec-conf.org/proceedings/lrec2014/pdf/102_Paper.pdf
-ATTACH DATABASE '/Users/j-hortle/gairaigo/db/lrec2014.db' AS db_lrec2014;
-CREATE TABLE IF NOT EXISTS
-   lrec2014(
-      confidence REAL,
-      english TEXT,
-      final TEXT
-   );
-INSERT INTO
-   lrec2014
-SELECT
-   confidence,
-   english,
-   japanese
-FROM
-   db_lrec2014.lrec2014
-GROUP BY -- For quick and dirty deduplication.
-   english;
--- Deduplicate...
--- Choose highest confidence? Duplicates seem to always have same confidences...
--- Choose first entry? Typically tends to prefer German reading (エネルギー).
-DELETE FROM
-   lrec2014
-WHERE
-   confidence NOT IN (
-      SELECT
-         MAX(confidence)
-      FROM
-         lrec2014
-      GROUP BY
-         english
-   );
-DETACH db_lrec2014;
 
 -- JTCA 外来語（カタカナ）表記ガイドライン 第3版
 ATTACH DATABASE '/Users/j-hortle/gairaigo/db/jtca.db' AS db_jtca;
@@ -61,6 +26,28 @@ FROM
    db_jtca.katakana_guide;
 -- No need to deduplicate.
 DETACH db_jtca;
+
+-- LREC2014
+-- Bilingual Dictionary Construction with Transliteration Filtering; Richardson, Nakazawa, Kurohashi (2014).
+-- http://www.lrec-conf.org/proceedings/lrec2014/pdf/102_Paper.pdf
+ATTACH DATABASE '/Users/j-hortle/gairaigo/db/lrec2014.db' AS db_lrec2014;
+CREATE TABLE IF NOT EXISTS
+   lrec2014(
+      confidence REAL,
+      english TEXT,
+      final TEXT
+   );
+INSERT INTO
+   lrec2014
+SELECT -- For quick and dirty deduplication.
+   max(confidence),
+   english,
+   japanese
+FROM
+   db_lrec2014.lrec2014
+GROUP BY 
+   english;
+DETACH db_lrec2014;
 
 -- JMdict
 ATTACH DATABASE '/Users/j-hortle/gairaigo/db/jmdict.db' AS db_jmdict;
@@ -136,9 +123,9 @@ INSERT INTO
    unique_tokens(
       english
    )
-SELECT UPPER(english) FROM lrec2014
-UNION
 SELECT UPPER(english) FROM jtca
+UNION
+SELECT UPPER(english) FROM lrec2014
 UNION
 SELECT UPPER(english) FROM wikipedia
 UNION
@@ -152,10 +139,10 @@ SELECT
    COALESCE(lrec2014.final, jtca.final, jmdict.final, wikipedia.final) AS final
 FROM
    unique_tokens
-   LEFT JOIN lrec2014
-      ON unique_tokens.english = lrec2014.english COLLATE NOCASE -- 162,963 entries
    LEFT JOIN jtca
       ON unique_tokens.english = jtca.english COLLATE NOCASE -- 762 entries
+   LEFT JOIN lrec2014
+      ON unique_tokens.english = lrec2014.english COLLATE NOCASE -- 162,963 entries
    LEFT JOIN jmdict
       ON unique_tokens.english = jmdict.english COLLATE NOCASE -- 25,557 entries
    LEFT JOIN wikipedia
