@@ -2,7 +2,7 @@
 
 In modern Japanese, a vast array of loanwords are employed in everyday life. These words are commonly written in *katakana*, one of the three primary scripts used to write Japanese. Although some words such as コーヒー *kōhī,* and パン *pan* are from sources other than English (Dutch *koffie* and Portuguese *pão*, respectively), the majority of loanwords in use today are derived from English. In addition to calques from English, there are also terms and phrases that have been coined by the Japanese using English roots; these are known as 和製英語 *wasei eigo* ("English made in Japan") and typically do not translate directly: e.g., メールマガジン *mēru magajin* ("mail magazine") for an e-mail newsletter.
 
-This repository contains primarily some Python (>= 3.6) scripts for scraping various resources in order to create a set of (primarily English) loanwords in Japanese and some SQL scripts to merge the data. At the moment, there are 221,587 English-Japanese vocabulary pairs.
+This repository contains primarily some Python (>= 3.6) scripts for scraping various resources in order to create a set of (primarily English) loanwords in Japanese and some SQL scripts to merge the data. At the moment, there are 221,588 English-Japanese vocabulary pairs.
 
 This serves two main purposes:
 
@@ -85,11 +85,11 @@ Another complicating factor is the presence of multiple transcription systems an
 
 We let the data speak for themselves and accept mappings based on the reliability of the resource.
 
-For resources of type one, we choose the ordering `LREC'14 > JTCA > JMdict > Wikipedia`. Firstly, both Wikipedia and JMdict are open source, however JMdict with its etymology and *wasei* tags allow us to make better judgements. Furthermore, while Wikipedia gives us a large resource it is relatively low-quality, suffering from inconsistent transcriptions and nicknames, etc. The relative ordering of LREC'14 and JTCA is debatable: LREC'14 provides many good scientific and technical vocabulary but is only backed by three authors and many English-katakana pairs collapse to a single item after normalization, while JTCA provides far fewer vocabulary items but is endorsed by an industry association.
+For resources of type one, we choose the ordering `JTCA > LREC'14 > JMdict > Wikipedia`. Firstly, both Wikipedia and JMdict are open source, however JMdict with its etymology and *wasei* tags allow us to make better judgements. Furthermore, while Wikipedia gives us a large resource it is relatively low-quality, suffering from inconsistent transcriptions and nicknames, etc. The relative ordering of LREC'14 and JTCA is debatable: LREC'14 provides many good scientific and technical vocabulary but is only backed by three authors and many English-katakana pairs collapse to a single item after normalization, while JTCA provides far fewer vocabulary items but is endorsed by an industry association.
 
 For resources of type two, we choose the ordering `Britfone > CMUdict > Wiktionary`. Wiktionary's transcriptions were so volatile and low-quality that, despite the large number of terms it contributed, it may be worth dropping the resource altogether. Both Britfone and CMUdict provide high-quality, canonical transcriptions for British and American English (received pronunciation (RP) and general American (GA), respectively). However, RP is typically the model for the import of loanwords and so transcriptions from RP tend to be better. In more recent years, however, loanwords from GA have seen a rise, but this is unlikely to overtake the large bulk of RP-based terms that already exist in Japanese in the near future.
 
-After extracting transcriptions from resources of both types, we then merge them to create the final dataset. In this final merge, we prefer type one to type two. The full ordering is then `LREC'14 > JTCA > JMdict > Wikipedia > Britfone > CMUdict > Wiktionary`.
+After extracting transcriptions from resources of both types, we then merge them to create the final dataset. In this final merge, we prefer type one to type two. The full ordering is then `JTCA > LREC'14 > JMdict > Wikipedia > Britfone > CMUdict > Wiktionary`.
 
 Aside from this, there remain English homonyms like "wind", which could be ウィンド *windo* or ワインド *waindo*. We do not deal with this and simply list whichever transcription appears first in the ordering.
 
