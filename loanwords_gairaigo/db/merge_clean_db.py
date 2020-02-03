@@ -119,4 +119,51 @@ with sqlite3.connect(str(MERGED_DB.resolve())) as conn:
                             """,
                             (e, j),
                         )
+
+    # Fix pronunciations for single letters.
+    for kana_alphabet in zip(
+        (
+            "エー",
+            "ビー",
+            "シー",
+            "ディー",
+            "イー",
+            "エフ",
+            "ジー",
+            "エイチ",
+            "アイ",
+            "ジェー",
+            "ケー",
+            "エル",
+            "エム",
+            "エヌ",
+            "オー",
+            "ピー",
+            "キュー",
+            "アール",
+            "エス",
+            "ティー",
+            "ユー",
+            "ブイ",
+            "ダブリュー",
+            "エックス",
+            "ワイ",
+            "ゼット",
+        ),
+        string.ascii_uppercase,
+    ):
+        conn.execute(
+            """
+                UPDATE
+                    merged
+                SET
+                    japanese = ?
+                WHERE
+                    english
+                IS
+                    ?
+                ;
+            """,
+            kana_alphabet,
+        )
 conn.close()
