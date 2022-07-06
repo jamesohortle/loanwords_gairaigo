@@ -1,4 +1,4 @@
-lxml==4.6.2
+lxml==4.9.1
 mysql-connector-python==8.0.18
 protobuf==3.10.0
 six==1.12.0
