@@ -1,5 +1,5 @@
 lxml==4.6.2
 mysql-connector-python==8.0.18
-protobuf==3.10.0
+protobuf==3.18.3
 six==1.12.0
 Unidecode==1.1.1
